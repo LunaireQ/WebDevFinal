@@ -1,0 +1,30 @@
+/*00: Global Variables*/
+
+
+
+
+/*01: Background*/
+body {
+    background-image: url(../img/ROGCity.gif);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+
+/*02: Topographyy*/
+
+
+
+
+/*03: Layout*/
+
+
+
+/*Timer Position*/
+div.timer {
+    position:absolute;
+    left: 38%;
+    top: 65%;
+    height: 15vw;
+    width: 25vw; 
+}
