@@ -28,3 +28,9 @@ div.timer {
     height: 15vw;
     width: 25vw; 
 }
+
+/*Timer Style*/
+#countdown{
+    color:aliceblue;
+    text-align: center;
+}
