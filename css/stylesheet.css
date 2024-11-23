@@ -17,7 +17,20 @@ body {
 
 
 /*03: Layout*/
-
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 5vw;
+    font-family: 'Roboto', sans-serif;
+    top: 10%;
+}
+h2 {
+    text-align: center;
+    color: white;
+    font-size: 2vw;
+    font-family: 'Roboto', sans-serif;
+    top: 6%;
+}
 
 
 /*Timer Position*/
