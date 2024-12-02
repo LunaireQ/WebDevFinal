@@ -17,11 +17,11 @@ body {
 
 
 /*03: Layout*/
-    /*Timer Position*/
-    div.timer {
-        position:absolute;
-        left: 38%;
-        top: 65%;
-        height: 15vw;
-        width: 25vw; 
-    }
+/*Timer Position*/
+div.timer {
+    position:absolute;
+    left: 38%;
+    top: 65%;
+    height: 15vw;
+    width: 25vw; 
+}
