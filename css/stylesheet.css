@@ -18,7 +18,7 @@ color: white;
 }
 
 
-/*02: Topographyy*/
+/*02: Topography*/
 
 
 
@@ -26,7 +26,7 @@ color: white;
 /*03: Layout*/
 /*Timer Position*/
 div.timer {
-    position:absolute;
+    position: absolute;
     left: 38%;
     top: 65%;
     height: 15vw;
