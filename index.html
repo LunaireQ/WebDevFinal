@@ -34,6 +34,8 @@
         <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
         <!--Timer Script-->
+        
+        <!-- REMOVE THE VISABLE COUNT DOWN TIMER-->
         <script>
     const firebaseConfig = {
   apiKey: "AIzaSyCeBAQORRXd7gA8nZOm2yMV1yKmifL9vp8",
@@ -63,7 +65,7 @@
                         let hrs = Math.floor(totalTime / 3600);
                         let mins = Math.floor((totalTime % 3600) / 60);
                         let secs = totalTime % 60;
-                        countdownElement.innerHTML = `${hrs}h ${mins}m ${secs}s remaining`;
+                        // countdownElement.innerHTML = `${hrs}h ${mins}m ${secs}s remaining`;
                         totalTime--;
                     }
                 }, 1000);
