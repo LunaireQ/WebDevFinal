@@ -9,8 +9,12 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
 }
-.h1{
-position: middle;
+.header{
+display: middle;
+font-size: 30px;
+text-align: center;
+height: 100vh;
+color: white;
 }
 
 
