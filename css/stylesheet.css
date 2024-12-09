@@ -12,6 +12,20 @@ body {
 }
 
 /*02: Topography*/
+@font-face{
+    font-family: 'myfont';
+    src: url(../fonts/chunkfive.eot);
+}
+h1 {
+    font-family: 'Dancing Script', sans-serif;
+    font-weight: 100;
+    letter-spacing: normal;
+    line-height: 1em;
+    text-align: middle;
+    color: chartreuse;
+    text-transform: uppercase;   
+    padding: 10px;           
+}
 
 /*03: Layout*/
 .header {
@@ -27,19 +41,16 @@ body {
 div.navbar {
   position: fixed;
   border: 3px solid var(--navbar-outline);
-  border-radius: 100% 100% 100% 0% / 100% 0% 100% 0%;
-  width: 600px;
+  width: 200px;
   color: var(--link-color);
   overflow: hidden;
   margin-left: 28%;
-  display: middle;
-  padding-left: 10%;
-  padding-right: 10%;
+  text-align: middle;
 }
 div.navbar ul {
   list-style-type: none;
   margin: auto;
-  padding: 6px;
+  padding: 10px;
 }
 div.navbar li {
   display: inline-table;
