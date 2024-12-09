@@ -30,7 +30,7 @@
                     <input type="number" id="hoursInput" placeholder="Hours">
                     <input type="number" id="minutesInput" placeholder="Minutes">
                     <input type="number" id="secondsInput" placeholder="Seconds">
-                    <button onclick="startTimer()">Start Timer</button>
+                    <button onclick="updateClosestCombination()">Start Timer</button>
                     <div id="countdown"></div>
                 </div>
 
@@ -153,10 +153,11 @@
                             console.error("Error getting documents: ", error);
                         });
                     }
-
+                    /*
                     document.getElementById('hoursInput').addEventListener('input', updateClosestCombination);
                     document.getElementById('minutesInput').addEventListener('input', updateClosestCombination);
                     document.getElementById('secondsInput').addEventListener('input', updateClosestCombination);
+                    */
 
                     function updateClosestCombination() {
                         let hours = parseInt(document.getElementById('hoursInput').value) || 0;
@@ -167,19 +168,6 @@
                         findClosestAlbumCombination(totalTime);
                         let playingDiv = document.querySelector('.playing');
                         playingDiv.innerHTML = '';
-
-                        if (closestCombination) {
-                            closestCombination.forEach(album => {
-                                let albumElement = document.createElement('div');
-                                albumElement.innerHTML = `Album: ${album.title}, Length: ${album.length} seconds`;
-                                playingDiv.appendChild(albumElement);
-                            });
-                            let differenceElement = document.createElement('div');
-                            differenceElement.innerHTML = `Time difference: ${closestDifference} seconds`;
-                            playingDiv.appendChild(differenceElement);
-                        } else {
-                            playingDiv.innerHTML = 'No combination of albums found.';
-                        }
                     }
                 </script>
 
