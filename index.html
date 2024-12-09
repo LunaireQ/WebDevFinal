@@ -167,19 +167,6 @@
                         findClosestAlbumCombination(totalTime);
                         let playingDiv = document.querySelector('.playing');
                         playingDiv.innerHTML = '';
-
-                        if (closestCombination) {
-                            closestCombination.forEach(album => {
-                                let albumElement = document.createElement('div');
-                                albumElement.innerHTML = `Album: ${album.title}, Length: ${album.length} seconds`;
-                                playingDiv.appendChild(albumElement);
-                            });
-                            let differenceElement = document.createElement('div');
-                            differenceElement.innerHTML = `Time difference: ${closestDifference} seconds`;
-                            playingDiv.appendChild(differenceElement);
-                        } else {
-                            playingDiv.innerHTML = 'No combination of albums found.';
-                        }
                     }
                 </script>
 
