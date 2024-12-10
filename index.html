@@ -42,6 +42,7 @@
                 <!--Video Player-->
                 <div class="Player">
                     <iframe width="600" height="400"></iframe>
+                
                 </div>
 
                 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
@@ -136,6 +137,13 @@
                             if (closestCombination.length > 0) {
                                 console.log("Closest combination of albums:");
                                 closestCombination.forEach(album => console.log(`Album: ${album.title}, Length: ${album.length}`));
+                                let playingDiv = document.querySelector('.playing');
+                                let html = '<h2>Closest Album Combination</h2>';
+                                closestCombination.forEach(album => {
+                                    html += `<p>Album: ${album.title}, Length: ${album.length} seconds</p>`;
+                                });
+                                html += `<p>Time difference: ${closestDifference} seconds</p>`;
+                                playingDiv.innerHTML = html;
                                 console.log(`Time difference: ${closestDifference} seconds`);
                             } else {
                                 console.log("No combination of albums found.");
