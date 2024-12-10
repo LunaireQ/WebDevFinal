@@ -112,30 +112,28 @@
                                 let albumData = doc.data();
                                 albums.push({ title: albumData.title, length: albumData.length });
                             });
-
-                            let closestCombination = null;
+                    
+                            let closestCombination = [];
                             let closestDifference = Infinity;
-
-                            function findCombination(currentCombination, currentIndex, currentTime) {
-                                if (currentTime >= targetTime) {
-                                    let difference = currentTime - targetTime;
-                                    if (difference < closestDifference) {
-                                        closestDifference = difference;
-                                        closestCombination = currentCombination.slice();
-                                    }
-                                    return;
+                    
+                            for(let i = 0; i < albums.length; i++) {
+                                let currentCombination = [albums[i]];
+                                let currentTime = albums[i].length;
+                    
+                                for(let j = i+1; j < albums.length; j++) {
+                                    if(currentTime + albums[j].length > targetTime) break;
+                                    currentCombination.push(albums[j]);
+                                    currentTime += albums[j].length;
                                 }
-
-                                for (let i = currentIndex; i < albums.length; i++) {
-                                    currentCombination.push(albums[i]);
-                                    findCombination(currentCombination, i + 1, currentTime + albums[i].length);
-                                    currentCombination.pop();
+                    
+                                let difference = targetTime - currentTime;
+                                if(difference >=0 && difference < closestDifference) {
+                                    closestDifference = difference;
+                                    closestCombination = currentCombination.slice();
                                 }
                             }
-
-                            findCombination([], 0, 0);
-
-                            if (closestCombination) {
+                    
+                            if (closestCombination.length > 0) {
                                 console.log("Closest combination of albums:");
                                 closestCombination.forEach(album => console.log(`Album: ${album.title}, Length: ${album.length}`));
                                 console.log(`Time difference: ${closestDifference} seconds`);
@@ -162,38 +160,7 @@
                         let playingDiv = document.querySelector('.playing');
                         playingDiv.innerHTML = '';
                     }
-
-                    function findRandomAlbumCombination(targetTime) {
-                        db.collection("albums").get().then((querySnapshot) => {
-                            let albums = [];
-                            querySnapshot.forEach((doc) => {
-                                let albumData = doc.data();
-                                albums.push({ title: albumData.title, length: albumData.length });
-                            });
-
-                            let selectedAlbums = [];
-                            let currentTime = 0;
-
-                            while (currentTime < targetTime && albums.length > 0) {
-                                let randomIndex = Math.floor(Math.random() * albums.length);
-                                let selectedAlbum = albums[randomIndex];
-                                selectedAlbums.push(selectedAlbum);
-                                currentTime += selectedAlbum.length;
-                                albums.splice(randomIndex, 1); // Remove the selected album from the list
-                            }
-
-                            if (currentTime >= targetTime) {
-                                console.log("Random combination of albums:");
-                                selectedAlbums.forEach(album => console.log(`Album: ${album.title}, Length: ${album.length}`));
-                                console.log(`Total time: ${currentTime} seconds`);
-                            } else {
-                                console.log("Could not find a combination of albums to meet the chosen time.");
-                            }
-                        }).catch((error) => {
-                            console.error("Error getting documents: ", error);
-                        });
-                    }
-
+                    
                     // Example usage:
                 </script>
 
