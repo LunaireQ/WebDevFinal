@@ -1,76 +1,79 @@
 /*00: Global Variables*/
 :root {
---navbar-outline: #992dbd;
---link-color: #ffffff;
+  --navbar-outline: #992dbd;
+  --link-color: #ffffff;
 }
-
-
 
 /*01: Background*/
 body {
-    background-image: url(../img/musicwave1.png);
-    background-size: 100% auto;
-    background-repeat: no-repeat;
+  background-image: url(../img/musicwave1.png);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
 }
-
-
 
 /*02: Topography*/
-
-
-
+@font-face{
+    font-family: 'myfont';
+    src: url(../fonts/chunkfive.eot);
+}
+h1 {
+    font-family: 'Dancing Script', sans-serif;
+    font-weight: 100;
+    letter-spacing: normal;
+    line-height: 1em;
+    text-align: middle;
+    color: chartreuse;
+    text-transform: uppercase;   
+    padding: 10px;           
+}
 
 /*03: Layout*/
-.header{
-    display: middle;
-    font-size: 30px;
-    text-align: center;
-    height: 100vh;
-    color: white;
-    padding-top: 3%;
-    }
+.header {
+  display: middle;
+  font-size: 30px;
+  text-align: center;
+  height: 100vh;
+  color: white;
+  padding-top: 3%;
+}
 
 /*Navbar Position*/
-div.navbar
-{
-    position: fixed;
-    border: 3px solid var(--navbar-outline);
-    border-radius: 100% 100% 100% 0% / 100% 0% 100% 0%;
-    width: 600px;
-    color: var(--link-color);
-    overflow:hidden;
-    margin-left: 28%;
-    display: middle;
-    padding-left: 10%;
-    padding-right: 10%;
+div.navbar {
+  position: fixed;
+  border: 3px solid var(--navbar-outline);
+  width: 200px;
+  color: var(--link-color);
+  overflow: hidden;
+  margin-left: 28%;
+  text-align: middle;
 }
 div.navbar ul {
-    list-style-type: none;
-    margin: auto;
-    padding: 6px;
+  list-style-type: none;
+  margin: auto;
+  padding: 10px;
 }
 div.navbar li {
-    display: inline-table;
-    margin-left: 40px;
-    text-align: center;
+  display: inline-table;
+  margin-left: 40px;
+  text-align: center;
 }
 div.navbar li a {
-    color: var(--link-color);
+  color: var(--link-color);
 }
 
 /*Player Position*/
 div.player {
-    position: absolute;
-    left: 38%;
-    top: 40%;
-    display: middle;
+  position: absolute;
+  left: 38%;
+  top: 40%;
+  display: middle;
 }
 
 /*Timer Position*/
 div.timer {
-    position: absolute;
-    left: 38%;
-    top: 65%;
-    height: 15vw;
-    width: 25vw; 
+  position: absolute;
+  left: 38%;
+  top: 65%;
+  height: 15vw;
+  width: 25vw;
 }
