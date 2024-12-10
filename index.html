@@ -22,149 +22,156 @@
             </li>
         </ul>
 
-    </div>
-    <div class="header">
-        <h1>Set a time</h1>
-        <!--Timer Class-->
-        <div class="timer">
-            <input type="number" id="hoursInput" placeholder="Hours">
-            <input type="number" id="minutesInput" placeholder="Minutes">
-            <input type="number" id="secondsInput" placeholder="Seconds">
-            <button onclick="updateClosestCombination()">Start Timer</button>
-            <div id="countdown"></div>
-        </div>
+         </div>
+            <div class="header">
+                <h1>Set a time</h1>
+                <!--Timer Class-->
+                <div class="timer">
+                    <input type="number" id="hoursInput" placeholder="Hours">
+                    <input type="number" id="minutesInput" placeholder="Minutes">
+                    <input type="number" id="secondsInput" placeholder="Seconds">
+                    <button onclick="updateClosestCombination()">Start Timer</button>
+                    <div id="countdown"></div>
+                </div>
 
-        <!--Currently Playing-->
-        <div class="playing">
+                <!--Currently Playing-->
+                <div class="playing">
 
-        </div>
+                </div>
 
-        <!--Video Player-->
-        <div class="Player">
-            <iframe id="videoPlayer" src="" frameborder="0" width="600" height="400"></iframe>
-        </div>
+                <!--Video Player-->
+                <div class="Player">
+                    <iframe width="600" height="400"></iframe>
+                
+                </div>
 
-        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
-        <!--Timer Script-->
+                <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+                <!--Timer Script-->
 
-        <!--Timer Script not functioning properly at this time-->
-        <script>
-            function startTimer() {
-                let hours = parseInt(document.getElementById('hoursInput').value) || 0;
-                let minutes = parseInt(document.getElementById('minutesInput').value) || 0;
-                let seconds = parseInt(document.getElementById('secondsInput').value) || 0;
-                let totalTime = (hours * 3600) + (minutes * 60) + seconds;
-                let countdownElement = document.getElementById('countdown');
+                <!--Timer Script not functioning properly at this time-->
+                <script>
+                    function startTimer() {
+            let hours = parseInt(document.getElementById('hoursInput').value) || 0;
+            let minutes = parseInt(document.getElementById('minutesInput').value) || 0;
+            let seconds = parseInt(document.getElementById('secondsInput').value) || 0;
+            let totalTime = (hours * 3600) + (minutes * 60) + seconds;
+            let countdownElement = document.getElementById('countdown');
 
-                let interval = setInterval(function () {
-                    if (totalTime <= 0) {
-                        clearInterval(interval);
-                        countdownElement.innerHTML = "Time's up!";
-                    } else {
-                        let hrs = Math.floor(totalTime / 3600);
-                        let mins = Math.floor((totalTime % 3600) / 60);
-                        let secs = totalTime % 60;
-                        // countdownElement.innerHTML = `${hrs}h ${mins}m ${secs}s remaining`;
-                        totalTime--;
-                    }
-                }, 1000);
+            let interval = setInterval(function () {
+                if (totalTime <= 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "Time's up!";
+                } else {
+                    let hrs = Math.floor(totalTime / 3600);
+                    let mins = Math.floor((totalTime % 3600) / 60);
+                    let secs = totalTime % 60;
+                   // countdownElement.innerHTML = `${hrs}h ${mins}m ${secs}s remaining`;
+                    totalTime--;
+                }
+            }, 1000);
+            
+        }
 
-            }
+/*
+        document.getElementById('hoursInput').addEventListener('wheel', handleScroll);
+        document.getElementById('minutesInput').addEventListener('wheel', handleScroll);
+        document.getElementById('secondsInput').addEventListener('wheel', handleScroll);
+        */
+                    
+                    const firebaseConfig = {
+                        apiKey: "AIzaSyCeBAQORRXd7gA8nZOm2yMV1yKmifL9vp8",
+                        authDomain: "albumtimer.firebaseapp.com",
+                        projectId: "albumtimer",
+                        storageBucket: "albumtimer.firebasestorage.app",
+                        messagingSenderId: "173551934977",
+                        appId: "1:173551934977:web:4de5d4c4ec256c395bea00",
+                        measurementId: "G-MPJD8DQ27X"
+                    };
+                    const firebaseApp = firebase.initializeApp(firebaseConfig);
+                    const db = firebase.firestore();
+                    const auth = firebaseApp.auth();
 
-            /*
-                    document.getElementById('hoursInput').addEventListener('wheel', handleScroll);
-                    document.getElementById('minutesInput').addEventListener('wheel', handleScroll);
-                    document.getElementById('secondsInput').addEventListener('wheel', handleScroll);
-                    */
+                    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-            const firebaseConfig = {
-                apiKey: "AIzaSyCeBAQORRXd7gA8nZOm2yMV1yKmifL9vp8",
-                authDomain: "albumtimer.firebaseapp.com",
-                projectId: "albumtimer",
-                storageBucket: "albumtimer.firebasestorage.app",
-                messagingSenderId: "173551934977",
-                appId: "1:173551934977:web:4de5d4c4ec256c395bea00",
-                measurementId: "G-MPJD8DQ27X"
-            };
-            const firebaseApp = firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
-            const auth = firebaseApp.auth();
-
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-            db.collection("albums").get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    let albumData = doc.data();
-                    let albumName = albumData.title; // Assuming 'name' is a field in the album document
-                    let albumLength = albumData.length; // Assuming 'length' is a field in the album document
-                    console.log(`Album: ${albumName}, Length: ${albumLength}`);
-                });
-            }).catch((error) => {
-                console.error("Error getting documents: ", error);
-            });
-
-            function findClosestAlbumCombination(targetTime) {
-                db.collection("albums").get().then((querySnapshot) => {
-                    let albums = [];
-                    querySnapshot.forEach((doc) => {
-                        let albumData = doc.data();
-                        albums.push({ title: albumData.title, length: albumData.length });
+                    db.collection("albums").get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            let albumData = doc.data();
+                            let albumName = albumData.title; // Assuming 'name' is a field in the album document
+                            let albumLength = albumData.length; // Assuming 'length' is a field in the album document
+                            console.log(`Album: ${albumName}, Length: ${albumLength}`);
+                        });
+                    }).catch((error) => {
+                        console.error("Error getting documents: ", error);
                     });
 
-                    let closestCombination = null;
-                    let closestDifference = Infinity;
-
-                    function findCombination(currentCombination, currentIndex, currentTime) {
-                        if (currentTime >= targetTime) {
-                            let difference = currentTime - targetTime;
-                            if (difference < closestDifference) {
-                                closestDifference = difference;
-                                closestCombination = currentCombination.slice();
+                    function findClosestAlbumCombination(targetTime) {
+                        db.collection("albums").get().then((querySnapshot) => {
+                            let albums = [];
+                            querySnapshot.forEach((doc) => {
+                                let albumData = doc.data();
+                                albums.push({ title: albumData.title, length: albumData.length });
+                            });
+                    
+                            let closestCombination = [];
+                            let closestDifference = Infinity;
+                    
+                            for(let i = 0; i < albums.length; i++) {
+                                let currentCombination = [albums[i]];
+                                let currentTime = albums[i].length;
+                    
+                                for(let j = i+1; j < albums.length; j++) {
+                                    if(currentTime + albums[j].length > targetTime) break;
+                                    currentCombination.push(albums[j]);
+                                    currentTime += albums[j].length;
+                                }
+                    
+                                let difference = targetTime - currentTime;
+                                if(difference >=0 && difference < closestDifference) {
+                                    closestDifference = difference;
+                                    closestCombination = currentCombination.slice();
+                                }
                             }
-                            return;
-                        }
-
-                        for (let i = currentIndex; i < albums.length; i++) {
-                            currentCombination.push(albums[i]);
-                            findCombination(currentCombination, i + 1, currentTime + albums[i].length);
-                            currentCombination.pop();
-                        }
+                    
+                            if (closestCombination.length > 0) {
+                                console.log("Closest combination of albums:");
+                                closestCombination.forEach(album => console.log(`Album: ${album.title}, Length: ${album.length}`));
+                                let playingDiv = document.querySelector('.playing');
+                                let html = '<h2>Closest Album Combination</h2>';
+                                closestCombination.forEach(album => {
+                                    html += `<p>Album: ${album.title}, Length: ${album.length} seconds</p>`;
+                                });
+                                html += `<p>Time difference: ${closestDifference} seconds</p>`;
+                                playingDiv.innerHTML = html;
+                                console.log(`Time difference: ${closestDifference} seconds`);
+                            } else {
+                                console.log("No combination of albums found.");
+                            }
+                        }).catch((error) => {
+                            console.error("Error getting documents: ", error);
+                        });
                     }
+                    /*
+                    document.getElementById('hoursInput').addEventListener('input', updateClosestCombination);
+                    document.getElementById('minutesInput').addEventListener('input', updateClosestCombination);
+                    document.getElementById('secondsInput').addEventListener('input', updateClosestCombination);
+                    */
 
-                    findCombination([], 0, 0);
+                    function updateClosestCombination() {
+                        let hours = parseInt(document.getElementById('hoursInput').value) || 0;
+                        let minutes = parseInt(document.getElementById('minutesInput').value) || 0;
+                        let seconds = parseInt(document.getElementById('secondsInput').value) || 0;
+                        let totalTime = (hours * 3600) + (minutes * 60) + seconds;
 
-                    if (closestCombination) {
-                        console.log("Closest combination of albums:");
-                        closestCombination.forEach(album => console.log(`Album: ${album.title}, Length: ${album.length}`));
-                        console.log(`Time difference: ${closestDifference} seconds`);
-                    } else {
-                        console.log("No combination of albums found.");
+                        findClosestAlbumCombination(totalTime);
+                        let playingDiv = document.querySelector('.playing');
+                        playingDiv.innerHTML = '';
                     }
-                }).catch((error) => {
-                    console.error("Error getting documents: ", error);
-                });
-            }
-            /*
-            document.getElementById('hoursInput').addEventListener('input', updateClosestCombination);
-            document.getElementById('minutesInput').addEventListener('input', updateClosestCombination);
-            document.getElementById('secondsInput').addEventListener('input', updateClosestCombination);
-            */
+                    
+                    // Example usage:
+                </script>
 
-            function updateClosestCombination() {
-                let hours = parseInt(document.getElementById('hoursInput').value) || 0;
-                let minutes = parseInt(document.getElementById('minutesInput').value) || 0;
-                let seconds = parseInt(document.getElementById('secondsInput').value) || 0;
-                let totalTime = (hours * 3600) + (minutes * 60) + seconds;
-
-                findClosestAlbumCombination(totalTime);
-                let playingDiv = document.querySelector('.playing');
-                playingDiv.innerHTML = '';
-            }
-
-
-        </script>
 
 </body>
 
