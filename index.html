@@ -169,6 +169,39 @@
                         let playingDiv = document.querySelector('.playing');
                         playingDiv.innerHTML = '';
                     }
+
+                    function findRandomAlbumCombination(targetTime) {
+                        db.collection("albums").get().then((querySnapshot) => {
+                            let albums = [];
+                            querySnapshot.forEach((doc) => {
+                                let albumData = doc.data();
+                                albums.push({ title: albumData.title, length: albumData.length });
+                            });
+
+                            let selectedAlbums = [];
+                            let currentTime = 0;
+
+                            while (currentTime < targetTime && albums.length > 0) {
+                                let randomIndex = Math.floor(Math.random() * albums.length);
+                                let selectedAlbum = albums[randomIndex];
+                                selectedAlbums.push(selectedAlbum);
+                                currentTime += selectedAlbum.length;
+                                albums.splice(randomIndex, 1); // Remove the selected album from the list
+                            }
+
+                            if (currentTime >= targetTime) {
+                                console.log("Random combination of albums:");
+                                selectedAlbums.forEach(album => console.log(`Album: ${album.title}, Length: ${album.length}`));
+                                console.log(`Total time: ${currentTime} seconds`);
+                            } else {
+                                console.log("Could not find a combination of albums to meet the chosen time.");
+                            }
+                        }).catch((error) => {
+                            console.error("Error getting documents: ", error);
+                        });
+                    }
+
+                    // Example usage:
                 </script>
 
 
