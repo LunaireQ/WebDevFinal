@@ -74,11 +74,6 @@
             
         }
 
-/*
-        document.getElementById('hoursInput').addEventListener('wheel', handleScroll);
-        document.getElementById('minutesInput').addEventListener('wheel', handleScroll);
-        document.getElementById('secondsInput').addEventListener('wheel', handleScroll);
-        */
                     
                     const firebaseConfig = {
                         apiKey: "AIzaSyCeBAQORRXd7gA8nZOm2yMV1yKmifL9vp8",
@@ -152,11 +147,7 @@
                             console.error("Error getting documents: ", error);
                         });
                     }
-                    /*
-                    document.getElementById('hoursInput').addEventListener('input', updateClosestCombination);
-                    document.getElementById('minutesInput').addEventListener('input', updateClosestCombination);
-                    document.getElementById('secondsInput').addEventListener('input', updateClosestCombination);
-                    */
+                  
 
                     function updateClosestCombination() {
                         let hours = parseInt(document.getElementById('hoursInput').value) || 0;
