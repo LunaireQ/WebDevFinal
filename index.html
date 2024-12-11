@@ -113,11 +113,11 @@
 
                     if (closestCombination.length > 0) {
                         console.log("Closest combination of albums:");
-                        closestCombination.forEach(album => console.log(`Album: ${album.Name}, Length: ${album.length}, Artist: ${album.artist}, Src: ${album.src}`));
+                        closestCombination.forEach(album => console.log(`Album: ${album.title}, Length: ${album.length}, Artist: ${album.artist}, Src: ${album.src}`));
                         let playingDiv = document.querySelector('.playing');
                         let html = '<h2>Closest Album Combination</h2>';
                         closestCombination.forEach((album, index) => {
-                            html += `<p>Album: ${album.Name}, Length: ${album.length} seconds, Artist: ${album.artist}, Src: ${album.src} <button onclick="removeAlbum(${index})">Remove</button></p>`;
+                            html += `<p>Album: ${album.title}, Length: ${album.length} seconds, Artist: ${album.artist}, Src: ${album.src} <button onclick="removeAlbum(${index})">Remove</button></p>`;
                         });
                         html += `<p>Time difference: ${closestDifference} seconds</p>`;
                         html += `<div><label for="rating">Rate this combination (1-5): </label><input type="number" id="rating" min="1" max="5"><button onclick="submitRating()">Submit Rating</button></div>`;
