@@ -10,8 +10,42 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  z-index: -1;
 }
 
+/**
+.album-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+  }
+  
+  .album-cover {
+    width: 30px;
+    padding-top: 50; /* This creates a square aspect ratio 
+    background-color: #ccc; /* Placeholder color 
+    position: relative;
+  }
+  
+  .album-cover::after {
+    content: '';
+    display: block;
+    padding-top: 100%; /* This maintains the square aspect ratio 
+  }
+  
+  .album-cover > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+*/
 /*02: Topography*/
 @font-face{
     font-family: 'myfont';
@@ -72,9 +106,9 @@ div.player {
 
 /*Timer Position*/
 div.timer {
-  position: absolute;
+  position: relative;
   left: 38%;
-  top: 65%;
+  top: 5%;
   height: 15vw;
   width: 25vw;
 }
@@ -82,7 +116,7 @@ div.timer {
 @media (max-width: 768px) {
   .header {
     font-size: 24px;
-    padding-top: 5%;
+    padding-top: 15%;
   }
 
   div.navbar {
@@ -106,8 +140,8 @@ div.timer {
     transform: translateX(-50%);
   }
   div.timer {
-    top: 70%;
-    height: auto;
+    top: 30%;
     width: 80%;
+    height: auto;
   }
 }
