@@ -13,7 +13,7 @@ body {
   z-index: -1;
 }
 
-/**
+
 .album-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -23,15 +23,15 @@ body {
   
   .album-cover {
     width: 30px;
-    padding-top: 50; /* This creates a square aspect ratio 
-    background-color: #ccc; /* Placeholder color 
+    padding-top: 50;
+    background-color: #ccc;
     position: relative;
   }
   
   .album-cover::after {
     content: '';
     display: block;
-    padding-top: 100%; /* This maintains the square aspect ratio 
+    padding-top: 100%;
   }
   
   .album-cover > * {
@@ -45,7 +45,7 @@ body {
     justify-content: center;
     text-align: center;
   }
-*/
+
 /*02: Topography*/
 @font-face{
     font-family: 'myfont';
