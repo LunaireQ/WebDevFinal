@@ -116,11 +116,11 @@
 
                     if (closestCombination.length > 0) {
                         console.log("Closest combination of albums:");
-                        closestCombination.forEach(album => console.log(`Album: ${album.title}, Length: ${album.length}, Artist: ${album.artist}, Src: ${album.src}`));
+                        closestCombination.forEach(album => console.log(`Album: ${album.Name}, Length: ${album.length}, Artist: ${album.artist}, Src: ${album.src}`));
                         let playingDiv = document.querySelector('.playing');
                         let html = '<h2>Closest Album Combination</h2>';
                         closestCombination.forEach((album, index) => {
-                            html += `<p>Album: ${album.title}, Length: ${album.length} seconds, Artist: ${album.artist}, Src: ${album.src} <button onclick="removeAlbum(${index})">Remove</button></p>`;
+                            html += `<p>Album: ${album.Name}, Length: ${album.length} seconds, Artist: ${album.artist}, Src: ${album.src} <button onclick="removeAlbum(${index})">Remove</button></p>`;
                         });
                         html += `<p>Time difference: ${closestDifference} seconds</p>`;
                         html += `<div><label for="rating">Rate this combination (1-5): </label><input type="number" id="rating" min="1" max="5"><button onclick="submitRating()">Submit Rating</button></div>`;
@@ -133,6 +133,42 @@
                     console.error("Error getting documents: ", error);
                 });
             }
+            function removeAlbum(index) {
+                let playingDiv = document.querySelector('.playing');
+                let albums = Array.from(playingDiv.querySelectorAll('p'));
+                albums[index].remove();
+            }
+
+            function replaceAlbum() {
+                db.collection("albums").get().then((querySnapshot) => {
+                    let albums = [];
+                    querySnapshot.forEach((doc) => {
+                        let albumData = doc.data();
+                        albums.push({ title: albumData.title, length: albumData.length, artist: albumData.artist, src: albumData.src });
+                    });
+
+                    let currentAlbums = Array.from(document.querySelectorAll('.playing p')).map(p => p.textContent);
+
+                    let availableAlbums = albums.filter(album => !currentAlbums.some(current => current.includes(album.title)));
+                    if (availableAlbums.length > 0) {
+                        let newAlbum = availableAlbums[Math.floor(Math.random() * availableAlbums.length)];
+                        let playingDiv = document.querySelector('.playing');
+                        let html = `<p>Album: ${newAlbum.title}, Length: ${newAlbum.length} seconds, Artist: ${newAlbum.artist}, Src: ${newAlbum.src} <button onclick="removeAlbum()">Remove</button></p>`;
+                        playingDiv.innerHTML += html;
+                    }
+                }).catch((error) => {
+                    console.error("Error fetching albums: ", error);
+                });
+            }
+
+            function removeAlbum(index) {
+                let playingDiv = document.querySelector('.playing');
+                let albums = Array.from(playingDiv.querySelectorAll('p'));
+                albums[index].remove();
+                replaceAlbum();
+            }
+
+
 
             function updateClosestCombination() {
                 let hours = parseInt(document.getElementById('hoursInput').value) || 0;
@@ -143,12 +179,6 @@
                 findClosestAlbumCombination(totalTime);
                 let playingDiv = document.querySelector('.playing');
                 playingDiv.innerHTML = '';
-            }
-
-            function removeAlbum(index) {
-                let playingDiv = document.querySelector('.playing');
-                let albums = Array.from(playingDiv.querySelectorAll('p'));
-                albums[index].remove();
             }
             function submitRating() {
                 let rating = parseInt(document.getElementById('rating').value);
@@ -168,7 +198,6 @@
                     alert("Please enter a rating between 1 and 5.");
                 }
             }
-
             window.onload = function() {
                 let popup = document.createElement('div');
                 popup.style.position = 'fixed';
