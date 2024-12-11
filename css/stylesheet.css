@@ -6,9 +6,10 @@
 
 /*01: Background*/
 body {
-  background-image: url(../img/musicwave1.png);
-  background-size: 100% auto;
+  background-image: url(../img/gray.png);
+  background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /*02: Topography*/
@@ -77,6 +78,36 @@ div.timer {
   height: 15vw;
   width: 25vw;
 }
-.Player{
-  padding-top: 11%;
+/*04: Responsive Design*/
+@media (max-width: 768px) {
+  .header {
+    font-size: 24px;
+    padding-top: 5%;
+  }
+
+  div.navbar {
+    width: 100%;
+    margin-left: 0;
+    border: none;
+    border-bottom: 3px solid var(--navbar-outline);
+  }
+  div.navbar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  div.navbar li {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  div.player, div.timer {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  div.timer {
+    top: 70%;
+    height: auto;
+    width: 80%;
+  }
 }
